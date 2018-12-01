@@ -12,9 +12,12 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.peter.dependencyinjection.models.LoginRepository;
 import com.google.gson.Gson;
 
 import java.io.IOException;
+
+import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText inputEmail, inputPassword;
@@ -123,8 +126,11 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Gson gson = new Gson();
             String data = gson.toJson(auth);
             try {
-              String responseData = HttpProvider.getInstance().login(data);
-              AuthToken token = gson.fromJson(responseData, AuthToken.class);
+            //  String responseData = HttpProvider.getInstance().login(data);
+                OkHttpClient client = new OkHttpClient();
+                LoginRepository repository = new LoginRepository(client);
+                String responseData = repository.login(data);
+                AuthToken token = gson.fromJson(responseData, AuthToken.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("AUTH",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
                 editor.putString("TOKEN", token.getToken());
