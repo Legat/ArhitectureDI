@@ -17,6 +17,8 @@ import com.google.gson.Gson;
 
 import java.io.IOException;
 
+import javax.inject.Inject;
+
 import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
@@ -24,10 +26,12 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private ProgressBar progress;
     private Button regBtn, logBtn;
     private String email, password;
+    @Inject LoginRepository repository;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        App.getComponrent().inject(this);
         inputEmail = findViewById(R.id.inputemail);
         inputPassword = findViewById(R.id.inputpassword);
         progress = findViewById(R.id.progress);
@@ -128,7 +132,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             try {
             //  String responseData = HttpProvider.getInstance().login(data);
             //    OkHttpClient client = new OkHttpClient();
-                LoginRepository repository = new LoginRepository();
+              //  LoginRepository repository = new LoginRepository();
                 String responseData = repository.login(data);
                 AuthToken token = gson.fromJson(responseData, AuthToken.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("AUTH",MODE_PRIVATE);
@@ -176,7 +180,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String data = gson.toJson(auth);
             try {
               //  String responseData = HttpProvider.getInstance().registration(data);
-                LoginRepository repository = new LoginRepository();
+            //    LoginRepository repository = new LoginRepository();
                 String responseData = repository.registration(data);
                 AuthToken token = gson.fromJson(responseData, AuthToken.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("AUTH",MODE_PRIVATE);

@@ -17,7 +17,7 @@ public class LoginRepository {
     private MediaType json;
     public static final String BASE_URL ="https://telranstudentsproject.appspot.com/_ah/api/contactsApi/v1";
     public LoginRepository() {
-        App.getComponrent().inject(this);
+    //    App.getComponrent().
         json = MediaType.parse("application/json; charset=utf-8");
     }
 
