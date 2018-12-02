@@ -2,6 +2,10 @@ package com.example.peter.dependencyinjection.models;
 
 import android.util.Log;
 
+import com.example.peter.dependencyinjection.App;
+
+import javax.inject.Inject;
+
 import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -9,11 +13,11 @@ import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class LoginRepository {
-    private OkHttpClient client;
+    @Inject OkHttpClient client;
     private MediaType json;
     public static final String BASE_URL ="https://telranstudentsproject.appspot.com/_ah/api/contactsApi/v1";
-    public LoginRepository(OkHttpClient client) {
-        this.client = client;
+    public LoginRepository() {
+        App.getComponrent().inject(this);
         json = MediaType.parse("application/json; charset=utf-8");
     }
 

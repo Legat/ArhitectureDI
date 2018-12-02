@@ -127,8 +127,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             String data = gson.toJson(auth);
             try {
             //  String responseData = HttpProvider.getInstance().login(data);
-                OkHttpClient client = new OkHttpClient();
-                LoginRepository repository = new LoginRepository(client);
+            //    OkHttpClient client = new OkHttpClient();
+                LoginRepository repository = new LoginRepository();
                 String responseData = repository.login(data);
                 AuthToken token = gson.fromJson(responseData, AuthToken.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("AUTH",MODE_PRIVATE);
@@ -175,7 +175,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             Gson gson = new Gson();
             String data = gson.toJson(auth);
             try {
-                String responseData = HttpProvider.getInstance().registration(data);
+              //  String responseData = HttpProvider.getInstance().registration(data);
+                LoginRepository repository = new LoginRepository();
+                String responseData = repository.registration(data);
                 AuthToken token = gson.fromJson(responseData, AuthToken.class);
                 SharedPreferences sharedPreferences = getSharedPreferences("AUTH",MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPreferences.edit();
