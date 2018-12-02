@@ -9,17 +9,16 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.peter.dependencyinjection.models.LoginRepository;
+import com.example.peter.dependencyinjection.models.dao.Auth;
+import com.example.peter.dependencyinjection.models.dao.AuthToken;
 import com.google.gson.Gson;
 
 import java.io.IOException;
 
 import javax.inject.Inject;
-
-import okhttp3.OkHttpClient;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private EditText inputEmail, inputPassword;

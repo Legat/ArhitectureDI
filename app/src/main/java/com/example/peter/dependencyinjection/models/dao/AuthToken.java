@@ -1,4 +1,4 @@
-package com.example.peter.dependencyinjection;
+package com.example.peter.dependencyinjection.models.dao;
 
 public class AuthToken {
     private String token;
